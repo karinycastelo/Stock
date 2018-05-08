@@ -1,0 +1,35 @@
+<%# <p id="notice"><%= notice %>
+<div class="mdl-card ssc_card">
+
+<div style="text-align: center;">
+<p>
+  <h4>
+    <strong>Item:</strong> <%= @item.code %> - <%= @item.name %>
+  </h4>
+</p>
+<p>
+  <strong>Descrição:</strong>
+  <%= @item.description %>
+  <strong>Quantidade:</strong>
+  <%= @item.quantity %>
+
+<strong>Patrimônio:</strong>
+  <%= @item.patrimony %>
+  <strong>Tipo:</strong>
+  <%= @item.type.description %>
+  <strong>Setor:</strong>
+  <%= @item.sector.name %>
+</p>
+
+<p>
+  <strong>Responsável:</strong>
+  <%= @item.user.name %>
+  <strong>Alugado:</strong>
+  <%= @item.rent_option %>
+  <strong>Empresa:</strong>
+  <%= @item.rent_enterprise %>
+</p>
+
+<%= image_tag @item.qr_code.url %>
+
+</div>

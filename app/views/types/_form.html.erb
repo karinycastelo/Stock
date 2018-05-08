@@ -1,0 +1,23 @@
+<%= simple_form_for(@type, html: { class: 'form-vertical' }) do |f| %>
+<% if type.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(type.errors.count, "error") %> prohibited this item from being saved:</h2>
+  <ul>
+    <% type.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="form-inputs">
+  <div class="row-sm">
+    <%= f.input :description, label: "Descrição" %>
+  </div>
+</div>
+<br>
+
+<div class="form-actions">
+  <%= f.button :submit, 'Criar Tipo de Item' %>
+</div>
+<% end %>

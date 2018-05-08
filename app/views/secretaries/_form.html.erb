@@ -1,0 +1,35 @@
+<div class: 'form-vertical' >
+<%= form_for(secretary) do |f| %>
+  <% if secretary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(secretary.errors.count, "error") %> proibiram este item de ser salvo:</h2>
+
+      <ul>
+      <% secretary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="form-inputs">
+  <div class="row-sm field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+<div class="form-inputs">
+  <div class="row-sm field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+
+<div class="form-inputs">
+  <div class="row-sm field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="form-actions actions">
+    <%= f.submit, 'Criar Secretaria', class: 'right' %>
+  </div>
+<% end %>

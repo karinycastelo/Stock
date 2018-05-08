@@ -1,0 +1,48 @@
+<!-- <div class="authform">
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %> -->
+<!-- <h3>Cadastrar</h3> -->
+<!-- <%= devise_error_messages! %>
+<div class="form-group">
+<%= f.label :name, 'Nome' %>
+<%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+</div>
+<div class="form-group">
+<%= f.label :email, 'E-mail' %>
+<%= f.email_field :email, class: 'form-control' %>
+</div>
+<div class="form-group">
+<%= f.label :password, 'Senha' %>
+<%= f.password_field :password, class: 'form-control' %>
+</div>
+<div class="form-group">
+<%= f.label :password_confirmation, 'Confirmação de Senha' %>
+<%= f.password_field :password_confirmation, class: 'form-control' %>
+</div>
+<%= f.submit 'Cadastrar', :class => 'button right' %>
+<% end %>
+</div> -->
+<div class="authform">
+  <%= simple_form_for(resource, html: { class: 'form-vertical' }) do |f| %>
+  <div class="form-inputs">
+    <div class="row">
+      <%= f.input :name, label: 'Nome' %>
+    </div>
+    <div class="row">
+      <%= f.input :email, label: 'E-mail', as: :email %>
+    </div>
+    <div class="row">
+      <%= f.input :password, label: 'Senha', as: :password %>
+    </div>
+    <div class="row">
+      <%= f.input :password_confirmation, label: 'Confirmação de Senha', as: :password %>
+    </div>
+    <div class="row">
+      <%= f.input :role_id, label: 'Cargo', collection: resource.roles, prompt: "Escolha um Cargo" %>
+    </div>
+  </div>
+  <br>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'button right' %>
+  </div>
+  <% end %>
+</div>

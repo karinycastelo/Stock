@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row">
+    <div class="column" style="text-align: left; margin-left: -15px;">
+      <h3>Tipos de Item</h3>
+    </div>
+    <div class="column" style="text-align: right;">
+      <h4><%= link_to 'Novo Tipo de Item', new_type_path %></h4>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @types.each do |type| %>
+      <tr>
+        <td><%= type.description %></td>
+        <td><%= link_to 'Mostrar', type %></td>
+        <td><%= link_to 'Editar', edit_type_path(type) %></td>
+        <td><%= link_to 'Excluir', type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

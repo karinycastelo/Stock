@@ -1,0 +1,26 @@
+<%= simple_form_for(@sector, html: { class: 'form-vertical' }) do |f| %>
+<% if sector.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(sector.errors.count, "error") %> prohibited this item from being saved:</h2>
+  <ul>
+    <% sector.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="form-inputs">
+  <div class="row-sm">
+      <%= f.input :name, label: "Nome" %>
+  </div>
+  <div class="row-sm">
+      <%= f.association :secretary, label: "Secretaria", label_method: :name, value_method: :id, prompt: "Escolha uma Secretaria" %>
+  </div>
+</div>
+<br>
+
+<div class="form-actions">
+  <%= f.button :submit, 'Salvar' %>
+</div>
+<% end %>

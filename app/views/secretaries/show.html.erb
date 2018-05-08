@@ -1,0 +1,14 @@
+<%# <p id="notice"><%= notice %></p>
+
+<div style="text-align: right;">
+<%= link_to 'Editar', edit_secretary_path(@secretary) %> |
+<%= link_to 'Voltar', secretaries_path %>
+</div>
+<div style="text-align: center;">
+<h3><%= @secretary.name %></h3>
+</div>
+
+<p>
+  <strong>Endereço:</strong>
+  <%= @secretary.address %>
+</p>

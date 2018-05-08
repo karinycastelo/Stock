@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Outputs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Datetime</th>
+      <th>Quantity</th>
+      <th>Item</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @outputs.each do |output| %>
+      <tr>
+        <td><%= output.date %></td>
+        <td><%= output.datetime %></td>
+        <td><%= output.quantity %></td>
+        <td><%= output.item %></td>
+        <td><%= link_to 'Show', output %></td>
+        <td><%= link_to 'Edit', edit_output_path(output) %></td>
+        <td><%= link_to 'Destroy', output, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Output', new_output_path %>
