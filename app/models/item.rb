@@ -18,13 +18,6 @@ class Item < ApplicationRecord
     end
   end
 
-  def qr_code
-    # if self.qr_code == nil
-      qr_code_img = RQRCode::QRCode.new(self.url, size: 4, level: :h ).to_img
-      self.update_attribute :qr_code, qr_code_img.to_string
-    # end
-  end
-
   def self.search(search)
     where("name LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
     # joins(:sector, :enterprise).where("sectors.name LIKE ? OR items.name LIKE ? OR items.description LIKE ? OR enterprises.name LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")

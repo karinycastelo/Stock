@@ -1,35 +1,63 @@
 <%# <p id="notice"><%= notice %>
 <div class="mdl-card ssc_card">
+  <div class="mdl-grid" style="margin: 0;">
+    <div class="mdl-cell mdl-cell--3-col">
+      <%= link_to qr_code_path(item_id: @item) do %>
+        <img src="<%= @img.to_data_url %>"/>
+      <% end %>
+    </div>
 
-<div style="text-align: center;">
-<p>
-  <h4>
-    <strong>Item:</strong> <%= @item.code %> - <%= @item.name %>
-  </h4>
-</p>
-<p>
-  <strong>Descrição:</strong>
-  <%= @item.description %>
-  <strong>Quantidade:</strong>
-  <%= @item.quantity %>
+    <div class="mdl-cell mdl-cell--9-col">
+      <div class="mdl-grid" style="height: 25%;padding:0;">
+      <div class="mdl-cell mdl-cell--2-col"></div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <h4><strong>Item:</strong> <%= @item.code %> - <%= @item.name %></h4>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col"></div>
+      </div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col">
+          <p>
+            <strong>Descrição:</strong>
+            <%= @item.description %>
+          </p>
+          <p>
+            <strong>Quantidade:</strong>
+            <%= @item.quantity %>
+            - 
+            <strong>Tipo:</strong>
+            <%= @item.type.description %>
+          </p>
+          <p>
+            <strong>Patrimônio:</strong>
+            <%= @item.patrimony %>
+          </p>
+        </div>
 
-<strong>Patrimônio:</strong>
-  <%= @item.patrimony %>
-  <strong>Tipo:</strong>
-  <%= @item.type.description %>
-  <strong>Setor:</strong>
-  <%= @item.sector.name %>
-</p>
+        <div class="mdl-cell mdl-cell--6-col">
+          <p>
+            <strong>Setor:</strong>
+            <%= @item.sector.name %>
+          </p>
+          <p>
+            <strong>Responsável:</strong>
+            <%= @item.user.name %>
+          </p>
+          <p>
+            <strong>Alugado:</strong>
+            <%= @item.rent_option %>
+            <% if @item.rent %>
+              <strong>Empresa:</strong>
+              <%= @item.rent_enterprise %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Responsável:</strong>
-  <%= @item.user.name %>
-  <strong>Alugado:</strong>
-  <%= @item.rent_option %>
-  <strong>Empresa:</strong>
-  <%= @item.rent_enterprise %>
-</p>
-
-<%= image_tag @item.qr_code.url %>
-
+  <div class="mdl-grid">
+  <td><%= link_to 'Entrada', new_input_path(item_id: @item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
+  <td><%= link_to 'Saída', new_output_path(item_id: @item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
+  </div>
 </div>

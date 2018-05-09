@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
@@ -12,6 +13,21 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @qr = RQRCode::QRCode.new(request.original_url, size: 5, level: :h )
+    @png = @qr.as_png( resize_gte_to: false, resize_exactly_to: false,
+          fill: 'white', color: 'black', size: 1000, border_modules: 4,
+          module_px_size: 6, file: nil # path to write
+          )
+    @img = @png.resize(200, 200)
+  end
+
+  def qr_code
+    @qr = RQRCode::QRCode.new(request.original_url, size: 5, level: :h )
+    @png = @qr.as_png( resize_gte_to: false, resize_exactly_to: false,
+          fill: 'white', color: 'black', size: 1000, border_modules: 4,
+          module_px_size: 6, file: nil # path to write
+          )
+    @img = @png.resize(400, 400)
   end
 
   # GET /items/new

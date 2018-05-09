@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # root to: 'visitors#index'
   # root to: 'items#index'
 
+  get 'qr_code', to: 'items#qr_code'
+
   devise_for :users,
     controllers: {
       registrations: 'users/registrations',
