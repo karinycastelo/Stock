@@ -1,33 +1,34 @@
-<p id="notice"><%= notice %></p>
+<%# <p id="notice"><%= notice %>
 
-<div class="container">
-  <div class="row">
-    <div class="column" style="text-align: left; margin-left: -15px;">
-      <h3>Tipos de Item</h3>
-    </div>
-    <div class="column" style="text-align: right;">
-      <h4><%= link_to 'Novo Tipo de Item', new_type_path %></h4>
-    </div>
+<div class="mdl-card ssc_card">
+  <div class="mdl-grid">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th class= "mdl-data-table__cell--non-numeric">Descrição</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @types.each do |type| %>
+          <tr>
+            <%# <tr data-link="enterprises/<%=enterprise.id>"> %>
+            <td><%= type.description %></td>
+            <td><%= link_to 'Editar', edit_type_path(type), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
+            <td><%= link_to 'Excluir', type, method: :delete, data: { confirm: 'Tem certeza' }, class: "mdl-button mdl-js-button mdl-button--primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+</div>
 
-  <div class="row">
-
-    <table class="table">
-  <thead>
-    <tr>
-      <th>Descrição</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @types.each do |type| %>
-      <tr>
-        <td><%= type.description %></td>
-        <td><%= link_to 'Mostrar', type %></td>
-        <td><%= link_to 'Editar', edit_type_path(type) %></td>
-        <td><%= link_to 'Excluir', type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="mdl-typography--text-right fixed-action-btn tooltipped">
+  <%= link_to new_type_path, class: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored", method: :get do %>
+    <i id="add"class="material-icons">add</i>
+    <div class="mdl-tooltip mdl-tooltip--large" for="add">
+      Novo Tipo
+    </div>
+  <% end %>
+</div>

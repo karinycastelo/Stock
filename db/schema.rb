@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20171211183158) do
   create_table "inputs", force: :cascade do |t|
     t.integer "quantity"
     t.integer "item_id"
-    t.integer "user_id_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_inputs_on_item_id"
-    t.index ["user_id_id"], name: "index_inputs_on_user_id_id"
+    t.index ["user_id"], name: "index_inputs_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -52,11 +52,11 @@ ActiveRecord::Schema.define(version: 20171211183158) do
   create_table "outputs", force: :cascade do |t|
     t.integer "quantity"
     t.integer "item_id"
-    t.integer "user_id_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_outputs_on_item_id"
-    t.index ["user_id_id"], name: "index_outputs_on_user_id_id"
+    t.index ["user_id"], name: "index_outputs_on_user_id"
   end
 
   create_table "secretaries", force: :cascade do |t|

@@ -1,5 +1,6 @@
-<%= simple_form_for(@enterprise, html: { class: 'form-vertical' }) do |f| %>
-<% if enterprise.errors.any? %>
+<div class="mdl-card" style="width: 40%">
+  <%= form_with(model: enterprise, local: true) do |f| %>
+  <% if enterprise.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(enterprise.errors.count, "error") %> prohibited this item from being saved:</h2>
   <ul>
@@ -9,18 +10,28 @@
   </ul>
 </div>
 <% end %>
+<div class="mdl-grid">
+      <div class="mdl-textfield mdl-js-textfield">
+        <%= f.text_field :name, class: "mdl-textfield__input" %>
+        <%= f.label :name, "Nome da Empresa", class: "mdl-textfield__label" %>
+      </div>
+    </div>
 
-<div class="form-inputs">
-  <div class="row-sm">
-      <%= f.input :name, label: "Nome" %>
-  </div>
-  <div class="row-sm">
-    <%= f.input :description, label: "Descrição" %>
-  </div>
+    <div class="mdl-grid">
+      <div class="mdl-textfield mdl-js-textfield">
+        <%= f.text_field :description, class: "mdl-textfield__input" %>
+        <%= f.label :description, "Descrição da Empresa", class: "mdl-textfield__label" %>
+      </div>
 </div>
-<br>
-
-<div class="form-actions">
-  <%= f.button :submit, 'Criar Empresa' %>
-</div>
+<div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--9-col"></div>
+      <div class="mdl-cell mdl-cell--2-col">
+        <% if enterprise.new_record? %>
+          <%= f.submit "Cadastrar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
+        <% else %>
+          <%= f.submit "Atualizar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
+        <% end %>
+      </div>
+    </div>
 <% end %>
+</div>

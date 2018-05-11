@@ -8,26 +8,26 @@
 # user = CreateAdminService.new.call
 # puts 'CREATED ADMIN USER: ' << user.email
 
-# User.create(id: 1, name: "ADMIN", email: "admin@admin.com",
+# User.create(id: 2, name: "ADMIN", email: "admin@admin.com",
 #   password: "123456", password_confirmation: "123456", role_id: 1)
 
-# User.create(id: 2,
+# User.create(id: 3,
 # name: "Secretário de Saúde", email: "saude@saude.com",
 # password: "123456", password_confirmation: "123456", role_id: 2)
 
-# User.create(id: 3, name: "Secretário de Educacão", email: "edu@edu.com",
-# password: "123456", password_confirmation: "123456", role_id: 2)
-
-# User.create(id: 4, name: "Secretário de Finanças", email: "fin@fin.com",
+# User.create(id: 4, name: "Secretário de Educacão", email: "edu@edu.com",
 # password: "123456", password_confirmation: "123456", role_id: 2)
 
 # User.create(id: 5, name: "Secretário de Finanças", email: "fin@fin.com",
-#       password: "123456", password_confirmation: "123456", role_id: 2)
+# password: "123456", password_confirmation: "123456", role_id: 2)
 
 # User.create(id: 6, name: "Secretário de Finanças", email: "fin@fin.com",
 #       password: "123456", password_confirmation: "123456", role_id: 2)
 
-# User.create(id: 7, name: "Nanderson", email: "nanderson@gmail.com",
+# User.create(id: 7, name: "Secretário de Finanças", email: "fin@fin.com",
+#       password: "123456", password_confirmation: "123456", role_id: 2)
+
+# User.create(id: 8, name: "Nanderson", email: "nanderson@gmail.com",
 #       password: "123456", password_confirmation: "123456", role_id: 4)
 
 # Secretary.create(id: 1, name: "Secretaria de Saúde", address: "", user_id: 2)
@@ -44,3 +44,12 @@
 # Type.create(description: "Máquina")
 
 # Enterprise.create(id: 1, name: "ALUCOM", address: "", description: "Aluguel de máquinas")
+
+# Item.create(code: 1, name: "Teste 1", description: "Testessss ssss ss ss ss s s s sSSSSSsssss ssss",
+#     patrimony: 123, type_id: 1, sector_id: 1, quantity: 1, user_id: 8, rent: false)
+# Item.create(code: 2, name: "Teste 2", description: "Testessss aa aaa aaaaaa aa s s s AAAaaAAaAa ssss",
+#     patrimony: 321, type_id: 1, sector_id: 1, quantity: 1, user_id: 8, rent: false)
+# Item.create(code: 3, name: "Teste 2", description: "Testessss ssss fasdfasf sdfsfasdf ss fasdfsdf s s sSSSSSsssss ssss",
+#     patrimony: 456, type_id: 2, sector_id: 3, quantity: 10, user_id: 8, rent: false)
+# Item.create(code: 4, name: "Computer 1", description: "Testessss bbbbb ccc ssdd aaaaa s s s sSSSSSsssss ssss",
+#     patrimony: 654, type_id: 3, sector_id: 3, quantity: 10, user_id: 8, rent: true, enterprise_id: 1)

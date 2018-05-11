@@ -6,7 +6,10 @@ class Item < ApplicationRecord
   delegate :secretary, to: :sector
   belongs_to :user
   belongs_to :enterprise, optional: true
-  dragonfly_accessor :qr_code
+  # dragonfly_accessor :qr_code
+
+  has_many :inputs
+  has_many :outputs
 
   def category
     if rent
@@ -16,6 +19,20 @@ class Item < ApplicationRecord
     else
       "ESTOQUE"
     end
+  end
+
+  def historic
+    historic = []
+    self.inputs.each do |i|
+      self.outputs.each do |o|
+        if i.created_at < o.created_at
+          historic.push(i)
+        else
+          historic.push(o)
+        end
+      end
+    end
+    historic
   end
 
   def self.search(search)

@@ -1,19 +1,22 @@
 <%# <p id="notice"><%= notice %>
 <div class="mdl-card ssc_card">
-  <div class="mdl grid">
-    <div class="mdl-cell mdl-cell--4-col">
+
+  <div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+
       <%= form_with url: items_path, method: :get, local: true do |f| %>
-        <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-          <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-            <i class="material-icons">search</i>
-          </label>
-          <div class="mdl-textfield__expandable-holder">
+
+<div class="mdl-textfield mdl-js-textfield">
+          <i class="mdl-textfield__icon material-icons">search</i>
             <%= f.text_field :search, placeholder: "", id: "search", class: "mdl-textfield__input" %>
-          </div>
+          <%# <label class="mdl-textfield__label" for="sample1">Text...</label> %>
+<%# <%= f.submit "Buscar", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored search-button'%>
         </div>
-      <%# <%= f.submit "Buscar", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'%>
       <% end %>
-    </div>
+  </div>
+  </div>
+
+  <div class="mdl grid">
     <div class="mdl-cell mdl-cell--4-col">
       <%= form_with url: items_path, method: :get, local: true do |f| %>
         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
@@ -30,6 +33,8 @@
         </label>
         <%# <%= f.submit "Buscar", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'%>
       <% end %>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col">
     </div>
     <div class="mdl-cell mdl-cell--4-col">
     </div>
@@ -54,7 +59,7 @@
         <tr>
           <td data-link="items/<%=item.id%>"><%= item.patrimony %></td>              
           <td data-link="items/<%=item.id%>"><%= item.name %></td>
-          <td data-link="items/<%=item.id%>"><%= item.sector.secretary.name %> - <%= item.sector.name %></td>
+          <td data-link="items/<%=item.id%>"><%= item.sector.name %></td>
           <td data-link="items/<%=item.id%>"><%= item.user.name %></td>
           <td data-link="items/<%=item.id%>"><%= item.category %></td>
           <%# <td><%= link_to 'Mostrar', item, class: "mdl-button mdl-js-button mdl-button--primary" %></td>

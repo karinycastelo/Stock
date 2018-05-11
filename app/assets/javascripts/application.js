@@ -23,6 +23,9 @@ $(document).ready(function() {
         $("td[data-link]").click(function() {
             window.location = $(this).data('link');
         });
+        $("tr").click(function() {
+            window.location = $(this).data("link")
+          })
     
     });
     // jQuery.extend(jQuery.validator.messages, {

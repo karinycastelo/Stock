@@ -11,7 +11,9 @@
       <div class="mdl-grid" style="height: 25%;padding:0;">
       <div class="mdl-cell mdl-cell--2-col"></div>
         <div class="mdl-cell mdl-cell--8-col">
-          <h4><strong>Item:</strong> <%= @item.code %> - <%= @item.name %></h4>
+            <div class="typo-styles__demo mdl-typography--display-1" style="font-weight: 300;" >
+              <strong><%= @item.category %></strong> <%= @item.code %> - <%= @item.name %>
+            </div>
         </div>
         <div class="mdl-cell mdl-cell--2-col"></div>
       </div>
@@ -47,8 +49,10 @@
             <strong>Alugado:</strong>
             <%= @item.rent_option %>
             <% if @item.rent %>
-              <strong>Empresa:</strong>
-              <%= @item.rent_enterprise %>
+               por 
+              <%= link_to enterprises_path(enterprise_id: @item.enterprise_id), class: "mdl-button mdl-js-button mdl-button--primary", style: "margin-top:-1,2px;padding:0;" do %>
+                <strong><%= @item.rent_enterprise %></strong>
+              <% end %>
             <% end %>
           </p>
         </div>
@@ -60,4 +64,31 @@
   <td><%= link_to 'Entrada', new_input_path(item_id: @item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
   <td><%= link_to 'Saída', new_output_path(item_id: @item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
   </div>
+</div>
+
+<div class="mdl-card ssc_card">
+  <div class="typo-styles__demo mdl-typography--display-3" style="margin: 0 auto; font-weight: 300;">Histórico</div>
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th class= "mdl-data-table__cell--non-numeric">-</th>
+        <th class= "mdl-data-table__cell--non-numeric">Data</th>
+        <th>Quantidade</th>
+        <th class= "mdl-data-table__cell--non-numeric">Data</th>
+        <th class= "mdl-data-table__cell--non-numeric">Responsável</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @item.historic.each do |h| %>
+        <tr>
+          <td><%= h.name %></td>              
+          <td><%= h.created_at %></td>
+          <td><%= h.quantity %></td>
+          <td><%= h.sector %></td>
+          <td><%= h.user.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

@@ -1,38 +1,36 @@
-<p id="notice"><%= notice %></p>
+<%# <p id="notice"><%= notice %>
 
-<div class="container">
-  <div class="row">
-    <div class="column" style="text-align: left; margin-left: -15px;">
-      <h3>Empresas</h3>
-    </div>
-    <div class="column" style="text-align: right;">
-      <h4><%= link_to 'Nova Empresa', new_enterprise_path %></h4>
-    </div>
-  </div>
-
-  <div class="row">
-
-    <table class="table">
+<div class="mdl-card ssc_card">
+  <div class="mdl-grid">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th colspan="3"></th>
+          <th class= "mdl-data-table__cell--non-numeric">Nome</th>
+          <th class= "mdl-data-table__cell--non-numeric">Descrição</th>
+          <th colspan="2"></th>
         </tr>
       </thead>
 
       <tbody>
         <% @enterprises.each do |enterprise| %>
+        <%# <tr data-link="enterprises/<%=enterprise.id>"> %>
         <tr>
           <td><%= enterprise.name %></td>
           <td><%= enterprise.description %></td>
-          <td><%= link_to 'Mostrar', enterprise %></td>
           <td><%= link_to 'Editar', edit_enterprise_path(enterprise) %></td>
-          <td><%= link_to 'Excluir', enterprise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Excluir', enterprise, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
   </div>
+</div>
 
+<div class="mdl-typography--text-right fixed-action-btn tooltipped">
+  <%= link_to new_enterprise_path, class: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored", method: :get do %>
+    <i id="add"class="material-icons">add</i>
+    <div class="mdl-tooltip mdl-tooltip--large" for="add">
+      Nova Empresa
+    </div>
+  <% end %>
 </div>

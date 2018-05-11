@@ -31,10 +31,13 @@
 .mdl-button--fab {
     margin: 24px;
 }
+.mdl-textfield {
+    width: 100%;
+}
 
 .mdl-data-table {
-    // table-layout: fixed;
-    // width: 100%;
+    table-layout: fixed;
+    width: 100%;
 }
 table td, th {
     white-space: nowrap;
