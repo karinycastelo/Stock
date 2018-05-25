@@ -1,83 +1,76 @@
 <%# <p id="notice"><%= notice %>
-<div class="mdl-card ssc_card">
 
-  <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--12-col">
-
-      <%= form_with url: items_path, method: :get, local: true do |f| %>
-
-<div class="mdl-textfield mdl-js-textfield">
-          <i class="mdl-textfield__icon material-icons">search</i>
-            <%= f.text_field :search, placeholder: "", id: "search", class: "mdl-textfield__input" %>
-          <%# <label class="mdl-textfield__label" for="sample1">Text...</label> %>
-<%# <%= f.submit "Buscar", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored search-button'%>
+<div class="card" style="margin-top: 24px;">
+  <div class="card-content">
+    <div class="row">
+      <%= form_with url: items_path, method: :get, local: true, class: "col s12" do |f| %>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">search</i>
+            <%= f.text_field :search, placeholder: "Buscar por nome ou descrição do item", class: "form-control validate", id: "icon_prefix" %>
+          </div>
         </div>
+        <%# <%= f.submit "Buscar", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored search-button'%>
       <% end %>
-  </div>
-  </div>
-
-  <div class="mdl grid">
-    <div class="mdl-cell mdl-cell--4-col">
+      </div>
+    <div class="row" style="display: none;">
       <%= form_with url: items_path, method: :get, local: true do |f| %>
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-          <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
-          <span class="mdl-checkbox__label">Todos</span>
-        </label>
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-          <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
-          <span class="mdl-checkbox__label">Alugados</span>
-        </label>
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-3">
-          <input type="checkbox" id="checkbox-3" class="mdl-checkbox__input">
-          <span class="mdl-checkbox__label">Próprios</span>
-        </label>
-        <%# <%= f.submit "Buscar", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'%>
+          <div class="input-field col s4">
+            <%= f.check_box(:all, {}, true, false) %>
+            <%= f.label "Todos" %>
+          </div>
+          <div class="input-field col s4">
+            <%= f.check_box(:rent, {}, true, false) %>
+            <%= f.label "Alugados" %>
+          </div>
+          <div class="input-field col s4">
+            <%= f.check_box(:patrimony, {}, true, false) %>
+            <%= f.label "Próprios" %>
+          </div>
+          <%# <%= f.submit "Buscar", class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'%>
       <% end %>
-    </div>
-    <div class="mdl-cell mdl-cell--4-col">
-    </div>
-    <div class="mdl-cell mdl-cell--4-col">
     </div>
   </div>
 </div>
 
-<div class="mdl-card ssc_card">
-  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-    <thead>
-      <tr>
-        <th class= "mdl-data-table__cell--non-numeric">Patrimônio</th>
-        <th class= "mdl-data-table__cell--non-numeric">Nome</th>
-        <th class= "mdl-data-table__cell--non-numeric">Local</th>
-        <th class= "mdl-data-table__cell--non-numeric">Responsável</th>
-        <th class= "mdl-data-table__cell--non-numeric">Categoria</th>
-        <th colspan="4"></th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% @items.each do |item| %>
+<div class="card">
+  <div class="card-content">
+    <table class="responsive-table highlight">
+      <thead>
         <tr>
-          <td data-link="items/<%=item.id%>"><%= item.patrimony %></td>              
-          <td data-link="items/<%=item.id%>"><%= item.name %></td>
-          <td data-link="items/<%=item.id%>"><%= item.sector.name %></td>
-          <td data-link="items/<%=item.id%>"><%= item.user.name %></td>
-          <td data-link="items/<%=item.id%>"><%= item.category %></td>
-          <%# <td><%= link_to 'Mostrar', item, class: "mdl-button mdl-js-button mdl-button--primary" %></td>
-          <td><%= link_to 'Entrada', new_input_path(item_id: item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
-          <td><%= link_to 'Saída', new_output_path(item_id: item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
-          <%# <td><%= link_to 'Editar', edit_item_path(item) %></td>
-          <%# <td><%= link_to 'Excluir', item, method: :delete, data: { confirm: 'Certeza?' }, class: "mdl-button mdl-js-button mdl-button--primary" %></td>
+          <th>Patrimônio</th>
+          <th>Nome</th>
+          <th>Local</th>
+          <th>Responsável</th>
+          <th>Categoria</th>
+          <%# <th colspan="4"></th> %>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      
+      <tbody>
+        <% @items.each do |item| %>
+          <tr data-link="items/<%=item.id%>">
+            <td><%= item.patrimony %></td>          
+            <td><%= item.name %></td>
+            <td><%= item.sector.name %></td>
+            <td><%= item.user.name %></td>
+            <td><%= item.category %></td>
+            <%# <td><%= link_to 'Mostrar', item, class: "mdl-button mdl-js-button mdl-button--primary" %></td>
+            <%# <td><%= link_to 'Entrada', new_input_path(item_id: item) %></td>
+            <%# <td><%= link_to 'Saída', new_output_path(item_id: item) %></td>
+            <%# <td><%= link_to 'Editar', edit_item_path(item) %></td>
+            <%# <td><%= link_to 'Excluir', item, method: :delete, data: { confirm: 'Certeza?' }, class: "mdl-button mdl-js-button mdl-button--primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div class="mdl-typography--text-right fixed-action-btn tooltipped">
-  <%= link_to new_item_path, class: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored", method: :get do %>
+<div class="fixed-action-btn tooltipped" style="margin-bottom: 36px;">
+  <%= link_to new_item_path, class: "btn-floating btn-large waves-effect waves-light blue-grey darken-1", method: :get do %>
     <i id="add"class="material-icons">add</i>
-    <div class="mdl-tooltip mdl-tooltip--large" for="add">
-      Novo Item
-    </div>
   <% end %>
 </div>
+
+<%# waves-effect waves-light btn blue-grey darken-1 %>

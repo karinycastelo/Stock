@@ -29,8 +29,10 @@ class SecretariesController < ApplicationController
 
     respond_to do |format|
       if @secretary.save
-        format.html { redirect_to @secretary, notice: 'Secretary was successfully created.' }
-        format.json { render :show, status: :created, location: @secretary }
+        format.html { redirect_to secretaries_path, notice: 'Secretaria foi criada com sucesso.' }
+        # format.html { redirect_to @secretary, notice: 'Secretary was successfully created.' }
+        # format.json { render :show, status: :created, location: @secretary }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @secretary.errors, status: :unprocessable_entity }
@@ -43,8 +45,10 @@ class SecretariesController < ApplicationController
   def update
     respond_to do |format|
       if @secretary.update(secretary_params)
-        format.html { redirect_to @secretary, notice: 'Secretary was successfully updated.' }
-        format.json { render :show, status: :ok, location: @secretary }
+        # format.html { redirect_to @secretary, notice: 'Secretary was successfully updated.' }
+        format.html { redirect_to secretaries_path, notice: 'Secretaria foi atualizada com sucesso.' }
+        # format.json { render :show, status: :ok, location: @secretary }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @secretary.errors, status: :unprocessable_entity }
@@ -70,6 +74,6 @@ class SecretariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def secretary_params
-      params.require(:secretary).permit(:name, :address)
+      params.require(:secretary).permit(:name, :address, :user_id)
     end
 end

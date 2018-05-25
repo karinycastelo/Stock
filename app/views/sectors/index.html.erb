@@ -1,12 +1,13 @@
 <%# <p id="notice"><%= notice %>
-<div class="mdl-card ssc_card">
-  <div class="mdl-grid">
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+
+<div class="card">
+  <div class="card-content">
+  <table class="responsive-table highlight">
       <thead>
         <tr>
-          <th class= "mdl-data-table__cell--non-numeric">Nome</th>
-          <th class= "mdl-data-table__cell--non-numeric">Endereço</th>
-          <th class= "mdl-data-table__cell--non-numeric">Secretaria</th>
+          <th>Nome</th>
+          <th>Endereço</th>
+          <th>Secretaria</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -27,11 +28,8 @@
   </div>
 </div>
 
-<div class="mdl-typography--text-right fixed-action-btn tooltipped">
-  <%= link_to new_sector_path, class: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored", method: :get do %>
+<div class="fixed-action-btn tooltipped" style="margin-bottom: 36px;">
+  <%= link_to new_sector_path, class: "btn-floating btn-large waves-effect waves-light blue-grey darken-1", method: :get do %>
     <i id="add"class="material-icons">add</i>
-    <div class="mdl-tooltip mdl-tooltip--large" for="add">
-      Novo Setor
-    </div>
   <% end %>
 </div>

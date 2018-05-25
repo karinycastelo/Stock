@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @inoutput.name %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @inoutput.quantity %>
+</p>
+
+<p>
+  <strong>Sector:</strong>
+  <%= @inoutput.sector %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @inoutput.item %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @inoutput.user %>
+</p>
+
+<%= link_to 'Edit', edit_inoutput_path(@inoutput) %> |
+<%= link_to 'Back', inoutputs_path %>

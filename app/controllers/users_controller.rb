@@ -32,9 +32,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to :back, alert: "Acesso negado."
-    end
+    # unless @user.role_id == 1
+      # unless @user == current_user
+      # redirect_to :back, alert: "Acesso negado."
+    # end
   end
-
 end

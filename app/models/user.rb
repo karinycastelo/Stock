@@ -25,7 +25,17 @@ class User < ApplicationRecord
   end
 
   def roles
-    return [["Admin", 1], ["Secretário", 2], ["Sub-Secretário", 3], ["Gerente", 4], ["Funcionário", 5]]
+    # return [1, "Admin"], [2, "Secretário"], [3, "Sub-Secretário"], [4, "Gerente"], [5, "Funcionário"]]
+    [["Admin",1], ["Secretário", 2], ["Sub-Secretário", 3], ["Gerente",4 ], ["Funcionário", 5]]
+
+
+    # [
+    #   { id: 1, name: "Admin" },
+    #   { id: 2, name: "Secretário" },
+    #   { id: 3, name: "Sub-Secretário" },
+    #   { id: 4, name: "Gerente" },
+    #   { id: 5, name: "Funcionário" }
+    # ]
   end
   
     # Roles

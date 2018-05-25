@@ -1,79 +1,57 @@
-<div class="android-header mdl-layout__header mdl-layout__header--waterfall">
-    <div class="mdl-layout__header-row">
-        <span class="android-title mdl-layout-title">
-            <a href="https://www.caucaia.ce.gov.br/index.php?tabela=pagina&acao=orgao&codigo=8", class="mdl-navigation__link mdl-typography--text-uppercase">Secretaria de Saúde de Caucaia</a>
-        </span>
-        <!-- Add spacer, to align navigation to the right in desktop -->
-        <%# <div class="android-header-spacer mdl-layout-spacer"></div>
-        <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-        <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
-            <i class="material-icons">search</i>
-        </label>
-        <div class="mdl-textfield__expandable-holder">
-            <input class="mdl-textfield__input" type="text" id="search-field">
+<header>
+    <!-- start header nav-->
+    <%# <div class="navbar-fixed"> %>
+    <nav>
+        <div class="nav-wrapper blue-grey darken-1">
+            <a href="https://www.caucaia.ce.gov.br/index.php?tabela=pagina&acao=orgao&codigo=8" class="brand-logo">
+                <span class="logo-text">Secretaria de Saúde de Caucaia</span>
+            </a>
+            <% if user_signed_in? %>
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <%= link_to root_path do %>
+                            <i class="material-icons left">home</i>
+                            Principal
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to items_path do %>
+                            <i class="material-icons left">toc</i>
+                            Estoque
+                        <% end %>
+                    </li>
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-activates="Registersdropdown">
+                            <i class="material-icons left">create</i>
+                            Cadastros<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                        <ul id="Registersdropdown" class="dropdown-content dropdown-horizontal-list">
+                            <li><%= link_to 'Item', new_item_path %></li>
+                            <li><%= link_to 'Tipo de Item', types_path %></li>
+                            <li><%= link_to 'Secretaria', secretaries_path %></li>
+                            <li><%= link_to 'Setor', sectors_path %></li>
+                            <li><%= link_to 'Empresa', enterprises_path %></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-activates="Userdropdown">
+                            <i class="material-icons left">account_circle</i>
+                            Conta<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                        <ul id="Userdropdown" class="dropdown-content dropdown-horizontal-list">
+                            <% if current_user.is_admin? %>
+                            <li><%= link_to 'Usuários', users_path %></li>
+                            <% end %>
+                            <li><%= link_to "Editar Conta", edit_user_registration_path %></li>
+                            <li><%= link_to "Sair", destroy_user_session_path, method: :delete %></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <% end %>
         </div>
-        </div> %>
-
-        <!-- Navigation -->
-        <% if user_signed_in? %>
-
-            <div class="android-navigation-container">
-                <nav class="android-navigation mdl-navigation">
-                    <%= link_to 'Principal', root_path, class: "mdl-navigation__link mdl-typography--text-uppercase" %>
-                    <%= link_to 'Estoque', items_path, class: "mdl-navigation__link mdl-typography--text-uppercase" %>
-                    <%= link_to 'Estoque', items_path, class: "mdl-navigation__link mdl-typography--text-uppercase" %>
-                </nav>
-            </div>
-
-            <span class="android-mobile-title mdl-layout-title">SSC</span>
-
-            <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
-                <div id="cadastros" class="icon material-icons">create</div>
-                <div class="mdl-tooltip mdl-tooltip--large" for="cadastros">
-                Cadastros
-                </div>
-            </button>
-            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-                <li class="mdl-menu__item"><%= link_to 'Usuário', new_user_registration_path, class: "mdl-navigation__link" %></li>
-                <li class="mdl-menu__item"><%= link_to 'Item', new_item_path, class: "mdl-navigation__link" %></li>
-                <li class="mdl-menu__item"><%= link_to 'Tipo de Item', types_path, class: "mdl-navigation__link" %></li>
-                <li class="mdl-menu__item"><%= link_to 'Secretaria', secretaries_path, class: "mdl-navigation__link" %></li>
-                <li class="mdl-menu__item"><%= link_to 'Setor', sectors_path, class: "mdl-navigation__link" %></li>
-                <li class="mdl-menu__item"><%= link_to 'Empresa', enterprises_path, class: "mdl-navigation__link" %></li>
-            </ul>
-
-            <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button_2">
-                <i class="material-icons">account_circle</i>
-            </button>
-            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button_2">
-                <li class="mdl-menu__item"><%= link_to 'Usuários', users_path, class: "mdl-navigation__link" %></li>
-                <li class="mdl-menu__item"><%= link_to "Editar Conta", edit_user_registration_path, class: "mdl-navigation__link" %></li>
-                <li class="mdl-menu__item"><%= link_to "Sair", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %></li>
-            </ul>
-
-        <% end %>
-    </div>
-</div>
-
-<div class="android-drawer mdl-layout__drawer">
-    <span class="android-title mdl-layout-title">Secretaria de Saúde Caucaia</span>
-    <nav class="mdl-navigation">
-        <% if user_signed_in? %>
-            <%= link_to 'Principal', root_path, class: "mdl-navigation__link" %>
-            <%= link_to 'Estoque', items_path, class: "mdl-navigation__link" %>
-            <div class="android-drawer-separator"></div>
-            <span class="mdl-navigation__link" href="">Cadastros</span>
-            <%= link_to 'Usuário', new_user_registration_path, class: "mdl-navigation__link" %>
-            <%= link_to 'Item', new_item_path, class: "mdl-navigation__link" %>
-            <%= link_to 'Tipo de Item', types_path, class: "mdl-navigation__link" %>
-            <%= link_to 'Setor', sectors_path, class: "mdl-navigation__link" %>
-            <%= link_to 'Secretaria', secretaries_path, class: "mdl-navigation__link" %>
-            <%= link_to 'Empresa', enterprises_path, class: "mdl-navigation__link" %>
-            <div class="android-drawer-separator"></div>
-            <span class="mdl-navigation__link" href="">Conta</span>
-            <%= link_to 'Usuários', users_path, class: "mdl-navigation__link" %>
-            <%= link_to "Editar Conta", edit_user_registration_path, class: "mdl-navigation__link" %>
-            <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %>
-        <% end %>
     </nav>
-</div>
+    <%# </div> %>
+    <!-- end header nav-->
+  </header>

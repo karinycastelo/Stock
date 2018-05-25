@@ -1,94 +1,99 @@
 <%# <p id="notice"><%= notice %>
-<div class="mdl-card ssc_card">
-  <div class="mdl-grid" style="margin: 0;">
-    <div class="mdl-cell mdl-cell--3-col">
-      <%= link_to qr_code_path(item_id: @item) do %>
-        <img src="<%= @img.to_data_url %>"/>
-      <% end %>
-    </div>
-
-    <div class="mdl-cell mdl-cell--9-col">
-      <div class="mdl-grid" style="height: 25%;padding:0;">
-      <div class="mdl-cell mdl-cell--2-col"></div>
-        <div class="mdl-cell mdl-cell--8-col">
-            <div class="typo-styles__demo mdl-typography--display-1" style="font-weight: 300;" >
-              <strong><%= @item.category %></strong> <%= @item.code %> - <%= @item.name %>
-            </div>
+<div class="container">
+  <div class="card">
+    <div class="card-content">
+      <div class="row">
+        <div class="col s5" style="padding-left: unset;">
+          <%= link_to qr_code_path(item_id: @item) do %>
+            <img src="<%= @img.to_data_url %>"/>
+          <% end %>
         </div>
-        <div class="mdl-cell mdl-cell--2-col"></div>
-      </div>
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--6-col">
+        <div class="col s6" style="margin-top: 24px;">
+          <%= @item.category %> <%= @item.code %> - <%= @item.patrimony %> - <%= @item.name %>
           <p>
-            <strong>Descrição:</strong>
+            Descrição:
             <%= @item.description %>
           </p>
           <p>
-            <strong>Quantidade:</strong>
+            Quantidade:
             <%= @item.quantity %>
             - 
-            <strong>Tipo:</strong>
+            Tipo:
             <%= @item.type.description %>
           </p>
           <p>
-            <strong>Patrimônio:</strong>
-            <%= @item.patrimony %>
-          </p>
-        </div>
-
-        <div class="mdl-cell mdl-cell--6-col">
-          <p>
-            <strong>Setor:</strong>
+            Setor:
             <%= @item.sector.name %>
           </p>
           <p>
-            <strong>Responsável:</strong>
+            Responsável:
             <%= @item.user.name %>
           </p>
           <p>
-            <strong>Alugado:</strong>
-            <%= @item.rent_option %>
             <% if @item.rent %>
-               por 
-              <%= link_to enterprises_path(enterprise_id: @item.enterprise_id), class: "mdl-button mdl-js-button mdl-button--primary", style: "margin-top:-1,2px;padding:0;" do %>
-                <strong><%= @item.rent_enterprise %></strong>
+              Empresa:
+              <%= link_to enterprise_path(enterprise_id: @item.enterprise_id), class: "mdl-button mdl-js-button mdl-button--primary", style: "margin-top:-1,2px;padding:0;" do %>
+                <%= @item.rent_enterprise %>
               <% end %>
+            <% else %>
+              Alugado:
+              <%= @item.rent_option %></p>
             <% end %>
           </p>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col s6">
+          <%= link_to 'Entrada', new_inoutput_path(item_id: @item, name: "Entrada"), class: "waves-effect waves-light btn blue-grey darken-1 right" %>
+        </div>
+        <div class="col s6">
+          <%= link_to 'Saída', new_inoutput_path(item_id: @item, name: "Saída"), class: "waves-effect waves-light btn blue-grey darken-1 left" %>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="mdl-grid">
-  <td><%= link_to 'Entrada', new_input_path(item_id: @item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
-  <td><%= link_to 'Saída', new_output_path(item_id: @item), class: "mdl-button mdl-js-button mdl-button--primary" %></td>
-  </div>
-</div>
-
-<div class="mdl-card ssc_card">
-  <div class="typo-styles__demo mdl-typography--display-3" style="margin: 0 auto; font-weight: 300;">Histórico</div>
-  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-    <thead>
-      <tr>
-        <th class= "mdl-data-table__cell--non-numeric">-</th>
-        <th class= "mdl-data-table__cell--non-numeric">Data</th>
-        <th>Quantidade</th>
-        <th class= "mdl-data-table__cell--non-numeric">Data</th>
-        <th class= "mdl-data-table__cell--non-numeric">Responsável</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% @item.historic.each do |h| %>
-        <tr>
-          <td><%= h.name %></td>              
-          <td><%= h.created_at %></td>
-          <td><%= h.quantity %></td>
-          <td><%= h.sector %></td>
-          <td><%= h.user.name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  
+  <% if @item.inoutputs.count > 0 %>
+    <div class="card center">
+      <div class="card-content">
+        <h4>Histórico</h4>
+        <table class="responsive-table highlight">
+          <thead>
+            <tr>
+              <th>-</th>
+              <th>Data</th>
+              <th>Quantidade</th>
+              <th>Local</th>
+              <th>Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @item.inoutputs.each do |h| %>
+              <tr>
+                <td><%= h.name %></td>
+                <td><%= h.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+                <% if h.name == "Entrada" %>
+                <td style="color: green;">+<%= h.quantity %></td>
+                <% else %>
+                <td style="color: red;">-<%= h.quantity %></td>
+                <% end %>
+                <td><%= h.sector.name %></td>
+                <td><%= h.user.name %></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td colspan="2" style="text-align:center;">Saldo</td>
+              <% if @item.quantity > 0 %>
+                <td style="color: green;font-weight:bold;">+<%= @item.quantity %></td>
+                <% else %>
+                <td style="color: red;font-weight:bold;">-<%= @item.quantity %></td>
+                <% end %>
+              <td colspan="1"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
 </div>

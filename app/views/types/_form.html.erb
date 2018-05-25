@@ -1,31 +1,30 @@
-<div class="mdl-card" style="width: 40%">
-  <%= form_with(model: type, local: true) do |f| %>
-    <% if type.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(type.errors.count, "error") %> prohibited this item from being saved:</h2>
-        <ul>
-          <% type.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+<div class="card">
+  <div class="card-content">
+    <%= form_with(model: type, local: true) do |f| %>
+      <% if type.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(type.errors.count, "error") %> prohibited this item from being saved:</h2>
+          <ul>
+            <% type.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-    <div class="mdl-grid">
-      <div class="mdl-textfield mdl-js-textfield">
-        <%= f.text_field :description, class: "mdl-textfield__input" %>
-        <%= f.label :description, "Descrição do Tipo de Item", class: "mdl-textfield__label" %>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_field :description %>
+          <%= f.label :description, "Descrição do Tipo de Item" %>
+        </div>
       </div>
-    </div>
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--9-col"></div>
-      <div class="mdl-cell mdl-cell--2-col">
+      
+      <div class="actions center">
         <% if type.new_record? %>
-          <%= f.submit "Cadastrar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
+          <%= f.submit "Cadastrar", class:"waves-effect waves-light btn blue-grey darken-1" %>
         <% else %>
-          <%= f.submit "Atualizar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
+          <%= f.submit "Atualizar", class:"waves-effect waves-light btn blue-grey darken-1" %>
         <% end %>
       </div>
-    </div>
   <% end %>
 </div>

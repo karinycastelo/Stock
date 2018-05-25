@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Inoutputs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Sector</th>
+      <th>Item</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inoutputs.each do |inoutput| %>
+      <tr>
+        <td><%= inoutput.name %></td>
+        <td><%= inoutput.quantity %></td>
+        <td><%= inoutput.sector %></td>
+        <td><%= inoutput.item %></td>
+        <td><%= inoutput.user %></td>
+        <td><%= link_to 'Show', inoutput %></td>
+        <td><%= link_to 'Edit', edit_inoutput_path(inoutput) %></td>
+        <td><%= link_to 'Destroy', inoutput, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inoutput', new_inoutput_path %>

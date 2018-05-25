@@ -13,45 +13,38 @@
  *= require_tree .
  *= require_self
  */
+$primary-color: color("grey", "darken-3") !default;
+ body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
 
- .mdl-layout__content {
-    background-color: #333;
- }
- 
-.mdl-card {
-    background-color: rgba(255,255,255,0.9);
-    margin: 24px auto;
-    padding: 24px;
-}
-
-.ssc_card {
-    width: 70%;
-}
-
-.mdl-button--fab {
-    margin: 24px;
-}
-.mdl-textfield {
+  main {
+    flex: 1 0 auto;
+  }
+footer.page-footer {
+    padding: 0;
+    // position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
 }
 
-.mdl-data-table {
-    table-layout: fixed;
-    width: 100%;
-}
-table td, th {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-}
-td {
-    text-align: center !important;
-    vertical-align: middle !important;
+.card {
+  overflow: visible !important;
 }
 
-.mdl-mega-footer {
-    padding: 0 !important;
-    text-align: center;
-    height: 24px;
-}
+// .select_secretaries .dropdown-content {
+//   max-height: 130px;
+// }
+
+// .select_item_row .dropdown-content {
+//   max-height: 250px;
+// }
+// .select_item_user .dropdown-content {
+//   max-height: 200px;
+// }
+// .select_item_enterprise .dropdown-content {
+//   max-height: 130px;
+// }

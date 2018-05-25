@@ -7,8 +7,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
-    params[:search] ? @items = Item.search(params[:search].downcase) : @items = Item.all
+    @items = Item.search(params[:search])
   end
 
   # GET /items/1
@@ -35,17 +34,6 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
 
-    if params[:rent] == "on"
-      @item.rent = true
-      @item.enterprise_id = Enterprise.where(name: params[:item][:enterprise_id]).first.id
-    else
-      @item.rent = false
-    end
-
-    @item.type_id = Type.where(description: params[:item][:type_id]).first.id
-    @item.sector_id = Sector.where(name: params[:item][:sector_id]).first.id
-    @item.user_id = User.where(name: params[:item][:user_id]).first.id
-    
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item foi criado com sucesso.' }

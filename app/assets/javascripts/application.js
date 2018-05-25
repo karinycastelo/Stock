@@ -12,21 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require materialize-sprockets
 //= require_tree .
 
 $(document).ready(function() {
     $(".dropdown").dropdown();
+    $('select').material_select();
+    $('.date_time').mask('00/00/0000 00:00:00');
 
     jQuery(function($) {
 
-        $("td[data-link]").click(function() {
-            window.location = $(this).data('link');
-        });
-        $("tr").click(function() {
+        $("tr[data-link]").click(function() {
             window.location = $(this).data("link")
-          })
-    
+        })
+        $('.dropdown-trigger').dropdown();
+
+        $(".dropdown-content>li>a").css("color", 'gray');
     });
     // jQuery.extend(jQuery.validator.messages, {
     //     required: "Campo obrigatório.",
@@ -48,3 +49,8 @@ $(document).ready(function() {
     //     min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
     //   });
 });
+
+// $(document).on('page:load', function() {
+//     $('.selectpicker').selectpicker('refresh');
+
+//   });

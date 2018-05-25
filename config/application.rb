@@ -15,6 +15,9 @@ module RailsDevise
     config.i18n.default_locale = :'pt-BR'
     config.i18n.available_locales = ['pt-BR', 'en']
 
+    config.time_zone = 'Brasilia'
+    config.active_record.default_timezone = :local # Or :utc
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,

@@ -1,4 +1,4 @@
-<div class="mdl-card ssc_card">
+<div class="container">
   
   <%= form_with(model: item, local: true) do |f| %>
 
@@ -13,111 +13,67 @@
       </div>
     <% end %>
 
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col">
-        <div class="mdl-textfield mdl-js-textfield">
-          <%= f.number_field :code, class: "mdl-textfield__input" %>
-          <%= f.label :code, "Código", class: "mdl-textfield__label" %>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <div class="mdl-textfield mdl-js-textfield">
-          <%= f.label :patrimony, "Patrimônio", class: "mdl-textfield__label" %>
-          <%= f.number_field :patrimony, id: :item_patrimony, class: "mdl-textfield__input" %>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <div class="mdl-textfield mdl-js-textfield">
-          <%= f.label :name, "Nome", class: "mdl-textfield__label" %>
-          <%= f.text_field :name, id: :item_name, class: "mdl-textfield__input" %>
-        </div>
-      </div>
-    </div>
-      
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--3-col">
-        <div class="mdl-textfield mdl-js-textfield">
-          <%= f.label :quantity, "Quantidade", class: "mdl-textfield__label" %>
-          <%= f.number_field :quantity, class: "mdl-textfield__input" %>
-        </div>
-        </div>
-      <div class="mdl-cell mdl-cell--9-col">
-        <div class="mdl-textfield mdl-js-textfield">
-          <%= f.label :description, "Descrição", class: "mdl-textfield__label" %>
-          <%= f.text_field :description, class: "mdl-textfield__input" %>
-        </div>
-      </div>
-    </div>
+    <div class="card">
+      <div class="card-content">
+          <div class="row">
+            <div class="input-field col s3"> 
+              <%= f.number_field :code %>
+              <%= f.label :code, "Código" %>
+            </div>
+            <div class="input-field col s3"> 
+              <%= f.label :patrimony, "Patrimônio" %>
+              <%= f.number_field :patrimony %>
+            </div>
+            <div class="input-field col s6"> 
+              <%= f.label :name, "Nome" %>
+              <%= f.text_field :name %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <%= f.label :description, "Descrição" %>
+              <%= f.text_field :description %>
+            </div>
+          </div>
 
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col">
-        <div class="mdl-textfield mdl-js-textfield getmdl-select">
-        <%= f.text_field :type_id, id: :item_type_id, class: "mdl-textfield__input" %>
-        <%= f.hidden_field  :item_type_id %>
-        <label for="item_type_id" class="mdl-textfield__label">Tipo</label>
-        <ul for="item_type_id" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-          <% Type.all.each do |type| %>
-            <li class="mdl-menu__item"><%= type.description %></li>
-          <% end %>
-        </ul>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <div class="mdl-textfield mdl-js-textfield getmdl-select">
-          <%= f.text_field :sector_id, id: :item_sector_id, class: "mdl-textfield__input" %>
-          <%= f.hidden_field  :item_sector_id %>
-          <label for="item_sector_id" class="mdl-textfield__label">Setor</label>
-          <ul for="item_sector_id" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-            <% Sector.all.each do |sector| %>
-              <li class="mdl-menu__item"><%= sector.name %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <div class ="mdl-textfield mdl-js-textfield getmdl-select">
-          <%= f.text_field :user_id, id: :item_user_id, class: "mdl-textfield__input" %>
-          <%= f.hidden_field  :item_user_id %>
-          <label for="item_user_id" class="mdl-textfield__label">Responsável</label>
-          <ul for="item_user_id" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-            <% User.all.where("role_id != 1").each do |user| %>
-              <li class="mdl-menu__item"><%= user.name %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
+          <div class="row select_item_row">
+            <div class="input-field col s6">
+              <%= f.collection_select(:type_id, Type.all, :id, :description, include_blank: true) %>
+              <%= f.label :type_id, "Tipo" %>
+            </div>
+        
+            <div class="input-field col s6"> 
+              <%= f.collection_select(:sector_id, Sector.all, :id, :name, include_blank: true) %>
+              <%= f.label :sector_id, "Setor" %>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="input-field col s12"> 
+              <%= f.collection_select(:user_id, User.all.where("role_id == 4"), :id, :name, include_blank: true) %>
+              <%= f.label :user_id, "Responsável" %>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col s3" style='margin-top: 36px;'>
+              <%= f.check_box :rent, id: "rent" %>
+              <%= f.label "Alugado?", for: "rent", id: "rent" %>
+            </div>
+          <div class="input-field col s9">
+            <%= f.collection_select(:enterprise_id, Enterprise.all, :id, :name, include_blank: true) %>
+            <%= f.label :enterprise_id, "Empresa" %>
+          </div>
     </div>
-
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col">
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="rent" name="rent">
-          <input type="checkbox" id="rent" name="rent" class="mdl-checkbox__input">
-          <span class="mdl-checkbox__label">Alugado?</span>
-        </label>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <div class ="mdl-textfield mdl-js-textfield getmdl-select">
-          <%= f.text_field :enterprise_id, id: :item_enterprise_id, class: "mdl-textfield__input" %>
-          <%= f.hidden_field :item_enterprise_id %>
-          <label for="item_enterprise_id" class="mdl-textfield__label">Empresa</label>
-          <ul for="item_enterprise_id" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-            <% Enterprise.all.each do |e| %>
-              <li class="mdl-menu__item"><%= e.name %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--10-col"></div>
-      <div class="mdl-cell mdl-cell--2-col">
-        <% if item.new_record? %>
-          <%= f.submit "Cadastrar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
-        <% else %>
-          <%= f.submit "Atualizar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
-        <% end %>
-      </div>
+    
+    <%= f.hidden_field :quantity, value: 0 %>
+    
+    <div class="actions center">
+      <% if item.new_record? %>
+        <%= f.submit "Cadastrar", class:"waves-effect waves-light btn blue-grey darken-1" %>
+      <% else %>
+        <%= f.submit "Atualizar", class:"waves-effect waves-light btn blue-grey darken-1" %>
+      <% end %>
     </div>
   <% end %>
-
 </div>

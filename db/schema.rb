@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211183158) do
+ActiveRecord::Schema.define(version: 20180515154643) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "enterprises", force: :cascade do |t|
     t.string "name"
@@ -20,14 +23,17 @@ ActiveRecord::Schema.define(version: 20171211183158) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "inputs", force: :cascade do |t|
+  create_table "inoutputs", force: :cascade do |t|
+    t.string "name"
     t.integer "quantity"
-    t.integer "item_id"
-    t.integer "user_id"
+    t.bigint "sector_id"
+    t.bigint "item_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_inputs_on_item_id"
-    t.index ["user_id"], name: "index_inputs_on_user_id"
+    t.index ["item_id"], name: "index_inoutputs_on_item_id"
+    t.index ["sector_id"], name: "index_inoutputs_on_sector_id"
+    t.index ["user_id"], name: "index_inoutputs_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -35,12 +41,12 @@ ActiveRecord::Schema.define(version: 20171211183158) do
     t.string "name"
     t.string "description"
     t.integer "patrimony"
-    t.integer "type_id"
-    t.integer "sector_id"
+    t.bigint "type_id"
+    t.bigint "sector_id"
     t.integer "quantity"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.boolean "rent"
-    t.integer "enterprise_id"
+    t.bigint "enterprise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["enterprise_id"], name: "index_items_on_enterprise_id"
@@ -49,20 +55,10 @@ ActiveRecord::Schema.define(version: 20171211183158) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "outputs", force: :cascade do |t|
-    t.integer "quantity"
-    t.integer "item_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_outputs_on_item_id"
-    t.index ["user_id"], name: "index_outputs_on_user_id"
-  end
-
   create_table "secretaries", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_secretaries_on_user_id"
@@ -71,7 +67,7 @@ ActiveRecord::Schema.define(version: 20171211183158) do
   create_table "sectors", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.integer "secretary_id"
+    t.bigint "secretary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["secretary_id"], name: "index_sectors_on_secretary_id"
@@ -102,4 +98,13 @@ ActiveRecord::Schema.define(version: 20171211183158) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "inoutputs", "items"
+  add_foreign_key "inoutputs", "sectors"
+  add_foreign_key "inoutputs", "users"
+  add_foreign_key "items", "enterprises"
+  add_foreign_key "items", "sectors"
+  add_foreign_key "items", "types"
+  add_foreign_key "items", "users"
+  add_foreign_key "secretaries", "users"
+  add_foreign_key "sectors", "secretaries"
 end

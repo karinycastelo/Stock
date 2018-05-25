@@ -1,45 +1,38 @@
-<div class="mdl-card" style="width: 40%">
-  <%= form_with(model: sector, local: true) do |f| %>
-    <% if sector.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(sector.errors.count, "error") %> prohibited this item from being saved:</h2>
-        <ul>
-          <% sector.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-          <% end %>
-        </ul>
+<div class="card">
+  <div class="card-content">
+    <%= form_with(model: sector, local: true) do |f| %>
+      <% if sector.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(sector.errors.count, "error") %> prohibited this item from being saved:</h2>
+          <ul>
+            <% sector.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_field :name %>
+          <%= f.label :name, "Nome do Setor" %>
+        </div>
       </div>
-    <% end %>
 
-    <div class="mdl-grid">
-      <div class="mdl-textfield mdl-js-textfield">
-        <%= f.text_field :name, class: "mdl-textfield__input" %>
-        <%= f.label :name, "Nome do Setor", class: "mdl-textfield__label" %>
+      <div class="row">
+        <div class="input-field col s12"> 
+          <%= f.collection_select(:secretary_id, Secretary.all, :id, :name, include_blank: true) %>
+          <%= f.label :secretary_id, "Secretaria" %>
+        </div>
       </div>
-    </div>
-
-    <div class="mdl-grid">
-      <div class="mdl-textfield mdl-js-textfield getmdl-select">
-        <%= f.text_field :secretary_id, id: :secretary_id, class: "mdl-textfield__input" %>
-        <%= f.hidden_field :secretary_id %>
-        <label for="secretary_id" class="mdl-textfield__label">Secretaria</label>
-        <ul for="secretary_id" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-          <% Secretary.all.each do |s| %>
-            <li class="mdl-menu__item"><%= s.name %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--9-col"></div>
-      <div class="mdl-cell mdl-cell--2-col">
+    
+      <div class="actions center">
         <% if sector.new_record? %>
-          <%= f.submit "Cadastrar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
+          <%= f.submit "Cadastrar", class:"waves-effect waves-light btn blue-grey darken-1" %>
         <% else %>
-          <%= f.submit "Atualizar", class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
+          <%= f.submit "Atualizar", class:"waves-effect waves-light btn blue-grey darken-1" %>
         <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

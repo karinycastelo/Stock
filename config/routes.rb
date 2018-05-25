@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :inoutputs
   resources :outputs
   resources :inputs
   resources :items

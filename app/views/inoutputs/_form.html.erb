@@ -1,0 +1,46 @@
+<div class="container">
+<%= form_for(inoutput) do |f| %>
+
+    <% if inoutput.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(inoutput.errors.count, "error") %> prohibited this inoutput from being saved:</h2>
+
+        <ul>
+        <% inoutput.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="card">
+      <div class="card-content">
+      <div style="text-align: center;"><%= @item.category %> <%= @item.code %> - <%= @item.patrimony %> - <%= @item.name %></div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.number_field :quantity %>
+            <%= f.label :quantity, "Quantidade", min: 1, max: 1000 %>
+          </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s12"> 
+            <%= f.collection_select(:user_id, User.all.where("role_id != 1"), :id, :name, include_blank: true) %>
+            <%= f.label :user_id, "Responsável" %>
+          </div>
+          </div>
+
+          <div class="row">
+          <div class="input-field col s12"> 
+            <%= f.collection_select(:sector_id, Sector.all.where("secretary_id == 1"), :id, :name, include_blank: true) %>
+            <%= f.label :sector_id, "Setor" %>
+          </div>
+        </div>
+        <%= f.hidden_field :item_id, value: params[:item_id] %>
+        <%= f.hidden_field :name, value: params[:name] %>
+        <div class="actions center">
+          <%= f.submit params[:name], class: "waves-effect waves-light btn blue-grey darken-1" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -30,7 +30,8 @@ class EnterprisesController < ApplicationController
     respond_to do |format|
       if @enterprise.save
         format.html { redirect_to @enterprise, notice: 'Enterprise was successfully created.' }
-        format.json { render :show, status: :created, location: @enterprise }
+        # format.json { render :show, status: :created, location: @enterprise }
+        format.json { render :index, status: :created}
       else
         format.html { render :new }
         format.json { render json: @enterprise.errors, status: :unprocessable_entity }
