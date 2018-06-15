@@ -28,7 +28,7 @@
 
       <div class="row">
         <div class="input-field col s12">
-          <%= f.collection_select(:user_id, User.all.where("role_id == 2"), :id, :name, include_blank: "") %>
+          <%= f.collection_select(:user_id, User.all.where(role_id: 2), :id, :name, include_blank: "") %>
           <%= f.label :user_id, "Responsável" %>
         </div>
       </div>

@@ -24,14 +24,14 @@
           </div>
           <div class="row">
           <div class="input-field col s12"> 
-            <%= f.collection_select(:user_id, User.all.where("role_id != 1"), :id, :name, include_blank: true) %>
+            <%= f.collection_select(:user_id, @item.user.not_admin, :id, :name, include_blank: true) %>
             <%= f.label :user_id, "Responsável" %>
           </div>
           </div>
 
           <div class="row">
           <div class="input-field col s12"> 
-            <%= f.collection_select(:sector_id, Sector.all.where("secretary_id == 1"), :id, :name, include_blank: true) %>
+            <%= f.collection_select(:sector_id, Sector.all.where(secretary_id: 1), :id, :name, include_blank: true) %>
             <%= f.label :sector_id, "Setor" %>
           </div>
         </div>
