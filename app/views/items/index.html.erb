@@ -43,6 +43,7 @@
           <th>Local</th>
           <th>Responsável</th>
           <th>Categoria</th>
+          <th>Saldo</th>
           <%# <th colspan="4"></th> %>
         </tr>
       </thead>
@@ -55,6 +56,14 @@
             <td><%= item.sector.name %></td>
             <td><%= item.user.name %></td>
             <td><%= item.category %></td>
+            <% if item.quantity > 0 %>
+              <td style="color: green;font-weight:bold;">+<%= item.quantity %>
+            <% elsif item.quantity == 0 %>
+              <td style="font-weight:bold;"><%= item.quantity %>
+            <% else %>
+              <td style="color: red;font-weight:bold;">-<%= item.quantity %>
+            <% end %>
+            </td>
             <%# <td><%= link_to 'Mostrar', item, class: "mdl-button mdl-js-button mdl-button--primary" %></td>
             <%# <td><%= link_to 'Entrada', new_input_path(item_id: item) %></td>
             <%# <td><%= link_to 'Saída', new_output_path(item_id: item) %></td>
